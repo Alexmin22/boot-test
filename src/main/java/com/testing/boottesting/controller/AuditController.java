@@ -23,7 +23,7 @@ import static org.springframework.http.ResponseEntity.ok;
 public class AuditController {
 
     private final AuditService auditService;
-    private final HttpService httpService;
+//    private final HttpService httpService;
 
     @GetMapping("/{id}")
     public ResponseEntity<AuditEntity> getEntityById(@PathVariable long id) {
@@ -40,16 +40,16 @@ public class AuditController {
         return Thread.currentThread().toString();
     }
 
-    @GetMapping("/service")
-    public List<String> getService() {
-        List<URI> uris = List.of(
-            URI.create("https://jsonplaceholder.typicode.com/posts/1"),
-            URI.create("https://jsonplaceholder.typicode.com/posts/2"),
-            URI.create("https://jsonplaceholder.typicode.com/posts/3")
-        );
-
-        return httpService.fetchDataFromSources(uris);
-    }
+//    @GetMapping("/service")
+//    public List<String> getService() {
+//        List<URI> uris = List.of(
+//            URI.create("https://jsonplaceholder.typicode.com/posts/1"),
+//            URI.create("https://jsonplaceholder.typicode.com/posts/2"),
+//            URI.create("https://jsonplaceholder.typicode.com/posts/3")
+//        );
+//
+//        return httpService.fetchDataFromSources(uris);
+//    }
 
     @GetMapping
     public ResponseEntity<Iterable<AuditEntity>> getAll() {
