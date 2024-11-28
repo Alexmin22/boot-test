@@ -1,0 +1,53 @@
+### List Posts
+GET http://localhost:8080/api/posts
+
+### Get Post by ID
+GET http://localhost:8080/api/posts/1
+
+### Create new Post
+POST http://localhost:8080/api/posts
+Content-Type: application/json
+
+{
+  "title": "Dan's Test Title",
+  "body": "Dan's Test Body",
+  "id": {{$random.integer(4)}}
+}
+
+### Update Post
+PUT http://localhost:8080/api/posts/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "UPDATED TITLE",
+  "body": "UPDATED BODY",
+  "userId": {{$random.integer(20)}}
+}
+
+
+### Delete Post
+DELETE http://localhost:8080/api/posts/9
+
+###
+GET http://localhost:8080/api/posts/{{myVar}}
+
+> {%
+
+ client.test("GET return 500", function () {
+     client.assert(response.status > 400, "Status code is not 200!!")
+     client.global.set("myVar", "99")
+ });
+
+ %}
+
+###
+GET http://localhost:8080/api/posts
+
+> {%
+
+    client.test("GET return List", function () {
+        client.assert(response.body[0].id == 1, "Id matches!!")
+    });
+
+%}
